@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ex 6 - Usuários</title>
+</head>
+<body>
+    <h2>Filtro de Usuários</h2>
+    <input type="text" id="nome" placeholder="Nome">
+    <input type="number" id="idade" placeholder="Idade">
+    <button onclick="adicionar()">Cadastrar</button>
+    <br><br>
+    <button onclick="mostrarTodos()">Mostrar Todos</button>
+    <button onclick="mostrarMaiores()">Apenas Maiores de 18</button>
+    <ul id="lista"></ul>
+
+    <script>
+        let usuarios = [];
+
+        function renderizar(lista) {
+            const ul = document.getElementById("lista");
+            ul.innerHTML = "";
+            for (let i = 0; i < lista.length; i++) {
+                ul.innerHTML += `<li>${lista[i].nome} - ${lista[i].idade} anos</li>`;
+            }
+        }
+
+        function adicionar() {
+            const nome = document.getElementById("nome").value;
+            const idade = Number(document.getElementById("idade").value);
+            if (nome && idade > 0) {
+                usuarios.push({ nome: nome, idade: idade });
+                document.getElementById("nome").value = "";
+                document.getElementById("idade").value = "";
+                renderizar(usuarios);
+            }
+        }
+
+        function mostrarTodos() {
+            renderizar(usuarios);
+        }
+
+        function mostrarMaiores() {
+            const maiores = usuarios.filter(u => u.idade >= 18);
+            renderizar(maiores);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ex 10 - Ranking</title>
+</head>
+<body>
+    <h2>Ranking de Jogadores</h2>
+    <input type="text" id="jogador" placeholder="Nome do jogador">
+    <input type="number" id="pontos" placeholder="Pontos">
+    <button onclick="adicionar()">Adicionar Jogador</button>
+    <ul id="lista"></ul>
+
+    <script>
+        let jogadores = [];
+
+        function renderizar() {
+            jogadores.sort((a, b) => b.pontos - a.pontos);
+            
+            const rankingFormatado = jogadores.map((j, i) => {
+                return `${i + 1}º ${j.jogador} - ${j.pontos} pontos`;
+            });
+
+            const ul = document.getElementById("lista");
+            ul.innerHTML = "";
+            for (let i = 0; i < rankingFormatado.length; i++) {
+                ul.innerHTML += `<li>${rankingFormatado[i]}</li>`;
+            }
+        }
+
+        function adicionar() {
+            const nome = document.getElementById("jogador").value;
+            const pontos = Number(document.getElementById("pontos").value);
+            if (nome && pontos >= 0) {
+                jogadores.push({ jogador: nome, pontos: pontos });
+                document.getElementById("jogador").value = "";
+                document.getElementById("pontos").value = "";
+                renderizar();
+            }
+        }
+    </script>
+</body>
+</html>

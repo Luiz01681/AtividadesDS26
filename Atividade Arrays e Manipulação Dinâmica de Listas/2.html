@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ex 2 - Alunos</title>
+</head>
+<body>
+    <h2>Gerenciador de Alunos</h2>
+    <input type="text" id="nome" placeholder="Nome do aluno">
+    <input type="number" id="nota" placeholder="Nota">
+    <button onclick="adicionar()">Adicionar Aluno</button>
+    <button onclick="filtrar()">Aprovados (>= 7)</button>
+    <button onclick="renderizar(alunos)">Mostrar Todos</button>
+    <ul id="lista"></ul>
+
+    <script>
+        let alunos = [];
+
+        function renderizar(lista) {
+            const ul = document.getElementById("lista");
+            ul.innerHTML = "";
+            for (let i = 0; i < lista.length; i++) {
+                ul.innerHTML += `<li>${lista[i].nome} - Nota: ${lista[i].nota}</li>`;
+            }
+        }
+
+        function adicionar() {
+            const nome = document.getElementById("nome").value;
+            const nota = Number(document.getElementById("nota").value);
+            if (nome && nota >= 0) {
+                alunos.push({ nome: nome, nota: nota });
+                document.getElementById("nome").value = "";
+                document.getElementById("nota").value = "";
+                renderizar(alunos);
+            }
+        }
+
+        function filtrar() {
+            const aprovados = alunos.filter(a => a.nota >= 7);
+            renderizar(aprovados);
+        }
+    </script>
+</body>
+</html>

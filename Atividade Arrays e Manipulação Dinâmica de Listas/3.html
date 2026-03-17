@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ex 3 - Tarefas</title>
+</head>
+<body>
+    <h2>Lista de Tarefas</h2>
+    <input type="text" id="titulo" placeholder="Título da tarefa">
+    <select id="prioridade">
+        <option value="baixa">Baixa</option>
+        <option value="alta">Alta</option>
+    </select>
+    <button onclick="adicionar()">Adicionar</button>
+    <ul id="lista"></ul>
+
+    <script>
+        let tarefas = [];
+
+        function renderizar() {
+            const ul = document.getElementById("lista");
+            ul.innerHTML = "";
+            for (let i = 0; i < tarefas.length; i++) {
+                ul.innerHTML += `<li>[${tarefas[i].prioridade.toUpperCase()}] ${tarefas[i].titulo}</li>`;
+            }
+        }
+
+        function adicionar() {
+            const titulo = document.getElementById("titulo").value;
+            const prioridade = document.getElementById("prioridade").value;
+
+            if (titulo) {
+                const novaTarefa = { titulo: titulo, prioridade: prioridade };
+                if (prioridade === "alta") {
+                    tarefas.unshift(novaTarefa);
+                } else {
+                    tarefas.push(novaTarefa);
+                }
+                document.getElementById("titulo").value = "";
+                renderizar();
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ex 4 - Desconto</title>
+</head>
+<body>
+    <h2>Produtos (10% de desconto)</h2>
+    <ul id="lista"></ul>
+
+    <script>
+        const produtos = [
+            { nome: "Mouse", preco: 50 },
+            { nome: "Teclado", preco: 100 },
+            { nome: "Monitor", preco: 800 }
+        ];
+
+        const produtosComDesconto = produtos.map(p => {
+            return { nome: p.nome, preco: p.preco * 0.9 };
+        });
+
+        const ul = document.getElementById("lista");
+        for (let i = 0; i < produtosComDesconto.length; i++) {
+            ul.innerHTML += `<li>${produtosComDesconto[i].nome} - R$ ${produtosComDesconto[i].preco.toFixed(2)}</li>`;
+        }
+    </script>
+</body>
+</html>

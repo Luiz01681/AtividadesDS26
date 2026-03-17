@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ex 7 - LocalStorage</title>
+</head>
+<body>
+    <h2>Tarefas Salvas</h2>
+    <input type="text" id="tarefa" placeholder="Nova tarefa">
+    <button onclick="adicionar()">Adicionar</button>
+    <ul id="lista"></ul>
+
+    <script>
+        let tarefas = JSON.parse(localStorage.getItem("listaTarefas")) || [];
+
+        function renderizar() {
+            const ul = document.getElementById("lista");
+            ul.innerHTML = "";
+            for (let i = 0; i < tarefas.length; i++) {
+                ul.innerHTML += `<li>${tarefas[i]}</li>`;
+            }
+        }
+
+        function adicionar() {
+            const input = document.getElementById("tarefa");
+            if (input.value) {
+                tarefas.push(input.value);
+                localStorage.setItem("listaTarefas", JSON.stringify(tarefas));
+                input.value = "";
+                renderizar();
+            }
+        }
+
+        renderizar();
+    </script>
+</body>
+</html>

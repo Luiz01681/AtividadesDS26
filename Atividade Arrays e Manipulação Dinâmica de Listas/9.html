@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ex 9 - Filmes</title>
+</head>
+<body>
+    <h2>Catálogo de Filmes</h2>
+    <input type="text" id="titulo" placeholder="Título">
+    <input type="text" id="genero" placeholder="Gênero">
+    <input type="number" id="ano" placeholder="Ano">
+    <button onclick="adicionar()">Adicionar</button>
+    <hr>
+    <input type="text" id="filtroGenero" placeholder="Filtrar por gênero">
+    <button onclick="filtrar()">Filtrar</button>
+    <button onclick="renderizar(filmes)">Limpar Filtro</button>
+    <ul id="lista"></ul>
+
+    <script>
+        let filmes = [];
+
+        function renderizar(lista) {
+            const ul = document.getElementById("lista");
+            ul.innerHTML = "";
+            for (let i = 0; i < lista.length; i++) {
+                ul.innerHTML += `<li>${lista[i].titulo} (${lista[i].ano}) - ${lista[i].genero}</li>`;
+            }
+        }
+
+        function adicionar() {
+            const titulo = document.getElementById("titulo").value;
+            const genero = document.getElementById("genero").value;
+            const ano = document.getElementById("ano").value;
+            if (titulo && genero && ano) {
+                filmes.push({ titulo: titulo, genero: genero, ano: ano });
+                renderizar(filmes);
+            }
+        }
+
+        function filtrar() {
+            const generoBuscado = document.getElementById("filtroGenero").value.toLowerCase();
+            const filtrados = filmes.filter(f => f.genero.toLowerCase() === generoBuscado);
+            renderizar(filtrados);
+        }
+    </script>
+</body>
+</html>

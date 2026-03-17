@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ex 1 - Lista de Compras</title>
+</head>
+<body>
+    <h2>Lista de Compras</h2>
+    <input type="text" id="item" placeholder="Novo item">
+    <button onclick="adicionar()">Adicionar</button>
+    <ul id="lista"></ul>
+
+    <script>
+        let compras = [];
+
+        function renderizar() {
+            const lista = document.getElementById("lista");
+            lista.innerHTML = "";
+            for (let i = 0; i < compras.length; i++) {
+                lista.innerHTML += `<li>${compras[i]} <button onclick="remover(${i})">Remover</button></li>`;
+            }
+        }
+
+        function adicionar() {
+            const input = document.getElementById("item");
+            if (input.value.trim() !== "") {
+                compras.push(input.value);
+                input.value = "";
+                renderizar();
+            }
+        }
+
+        function remover(index) {
+            compras.splice(index, 1);
+            renderizar();
+        }
+    </script>
+</body>
+</html>

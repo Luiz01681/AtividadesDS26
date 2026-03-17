@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ex 8 - Editar Item</title>
+</head>
+<body>
+    <h2>Lista Editável</h2>
+    <input type="text" id="tarefa" placeholder="Nova tarefa">
+    <button onclick="adicionar()">Adicionar</button>
+    <ul id="lista"></ul>
+
+    <script>
+        let tarefas = [];
+
+        function renderizar() {
+            const ul = document.getElementById("lista");
+            ul.innerHTML = "";
+            for (let i = 0; i < tarefas.length; i++) {
+                ul.innerHTML += `<li>${tarefas[i]} <button onclick="editar(${i})">Editar</button></li>`;
+            }
+        }
+
+        function adicionar() {
+            const input = document.getElementById("tarefa");
+            if (input.value) {
+                tarefas.push(input.value);
+                input.value = "";
+                renderizar();
+            }
+        }
+
+        function editar(index) {
+            const novoValor = prompt("Edite a tarefa:", tarefas[index]);
+            if (novoValor !== null && novoValor.trim() !== "") {
+                tarefas.splice(index, 1, novoValor);
+                renderizar();
+            }
+        }
+    </script>
+</body>
+</html>
