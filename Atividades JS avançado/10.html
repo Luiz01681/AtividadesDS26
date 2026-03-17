@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ex 10 - Cadastro Profissional</title>
+    <style>
+        .erro-msg { color: red; font-size: 12px; display: block; margin-bottom: 5px; }
+        .sucesso { color: green; font-weight: bold; display: none; margin-top: 15px; }
+        .campo { margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Cadastro da Startup</h2>
+    <form id="form-startup">
+        <div class="campo">
+            <input type="text" id="c-nome" placeholder="Nome Completo">
+            <span id="err-nome" class="erro-msg"></span>
+        </div>
+        
+        <div class="campo">
+            <input type="email" id="c-email" placeholder="Email">
+            <span id="err-email" class="erro-msg"></span>
+        </div>
+        
+        <div class="campo">
+            <input type="number" id="c-idade" placeholder="Idade">
+            <span id="err-idade" class="erro-msg"></span>
+        </div>
+        
+        <div class="campo">
+            <input type="password" id="c-senha" placeholder="Senha">
+            <span id="err-senha" class="erro-msg"></span>
+        </div>
+        
+        <div class="campo">
+            <input type="password" id="c-confsenha" placeholder="Confirmar Senha">
+            <span id="err-confsenha" class="erro-msg"></span>
+        </div>
+
+        <button type="submit">Cadastrar Conta</button>
+    </form>
+
+    <p id="msg-sucesso" class="sucesso">✅ Cadastro realizado com sucesso!</p>
+
+    <script>
+        document.getElementById("form-startup").addEventListener("submit", function(e) {
+            e.preventDefault();
+
+            let nome = document.getElementById("c-nome").value;
+            let email = document.getElementById("c-email").value;
+            let idade = document.getElementById("c-idade").value;
+            let senha = document.getElementById("c-senha").value;
+            let confSenha = document.getElementById("c-confsenha").value;
+
+            document.querySelectorAll(".erro-msg").forEach(span => span.innerText = "");
+            document.getElementById("msg-sucesso").style.display = "none";
+
+            let tudoValido = true;
+
+            if (nome.trim() === "") {
+                document.getElementById("err-nome").innerText = "Nome é obrigatório.";
+                tudoValido = false;
+            }
+            if (!email.includes("@")) {
+                document.getElementById("err-email").innerText = "Email inválido.";
+                tudoValido = false;
+            }
+            if (idade === "" || Number(idade) < 18) {
+                document.getElementById("err-idade").innerText = "Deve ter 18 anos ou mais.";
+                tudoValido = false;
+            }
+            if (senha.length < 8) {
+                document.getElementById("err-senha").innerText = "A senha deve ter no mínimo 8 caracteres.";
+                tudoValido = false;
+            }
+            if (senha !== confSenha || confSenha === "") {
+                document.getElementById("err-confsenha").innerText = "As senhas não coincidem.";
+                tudoValido = false;
+            }
+
+            if (tudoValido) {
+                document.getElementById("msg-sucesso").style.display = "block";
+                document.getElementById("form-startup").reset();
+            }
+        });
+    </script>
+</body>
+</html>

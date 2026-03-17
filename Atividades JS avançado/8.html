@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ex 8 - Adivinhação</title>
+</head>
+<body>
+    <h2>Adivinhe o número (1 a 20)</h2>
+    <input type="number" id="palpite" placeholder="Seu palpite">
+    <button onclick="tentar()">Tentar</button>
+    <button onclick="reiniciar()" id="btn-reiniciar" style="display:none;">Jogar Novamente</button>
+    
+    <p id="msg-jogo"></p>
+    <p id="msg-tentativas">Tentativas: 0</p>
+
+    <script>
+        let numeroSecreto = Math.floor(Math.random() * 20) + 1;
+        let tentativas = 0;
+
+        function tentar() {
+            let palpite = Number(document.getElementById("palpite").value);
+            let msgJogo = document.getElementById("msg-jogo");
+            let msgTentativas = document.getElementById("msg-tentativas");
+            let btnReiniciar = document.getElementById("btn-reiniciar");
+
+            if(palpite < 1 || palpite > 20) return alert("Digite um número entre 1 e 20!");
+
+            tentativas++;
+            msgTentativas.innerText = `Tentativas: ${tentativas}`;
+
+            if (palpite === numeroSecreto) {
+                msgJogo.innerText = "🎉 Acertou!";
+                msgJogo.style.color = "green";
+                btnReiniciar.style.display = "inline";
+            } else if (palpite > numeroSecreto) {
+                msgJogo.innerText = "Muito alto!";
+                msgJogo.style.color = "red";
+            } else {
+                msgJogo.innerText = "Muito baixo!";
+                msgJogo.style.color = "blue";
+            }
+        }
+
+        function reiniciar() {
+            numeroSecreto = Math.floor(Math.random() * 20) + 1;
+            tentativas = 0;
+            document.getElementById("msg-tentativas").innerText = "Tentativas: 0";
+            document.getElementById("msg-jogo").innerText = "";
+            document.getElementById("palpite").value = "";
+            document.getElementById("btn-reiniciar").style.display = "none";
+        }
+    </script>
+</body>
+</html>

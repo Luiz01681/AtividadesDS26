@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ex 7 - Cadastro Simples</title>
+    <style>
+        .erro { color: red; font-size: 12px; display: block; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <h2>Cadastro</h2>
+    <form id="form-cadastro">
+        <label>Nome:</label><br>
+        <input type="text" id="nome">
+        <span id="erro-nome" class="erro"></span>
+
+        <label>Email:</label><br>
+        <input type="text" id="email">
+        <span id="erro-email" class="erro"></span>
+
+        <button type="submit">Cadastrar</button>
+    </form>
+
+    <script>
+        document.getElementById("form-cadastro").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let nome = document.getElementById("nome").value;
+            let email = document.getElementById("email").value;
+            let erroNome = document.getElementById("erro-nome");
+            let erroEmail = document.getElementById("erro-email");
+
+            erroNome.innerText = "";
+            erroEmail.innerText = "";
+
+            let valido = true;
+
+            if (nome.trim() === "") {
+                erroNome.innerText = "O nome não pode estar vazio.";
+                valido = false;
+            }
+
+            if (!email.includes("@")) {
+                erroEmail.innerText = "O email deve conter um '@'.";
+                valido = false;
+            }
+
+            if (valido) alert("Cadastro realizado com sucesso!");
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ex 9 - Votação</title>
+</head>
+<body>
+    <h2>Eleição de Representante</h2>
+    
+    <button onclick="votar('Alice')">Votar em Alice</button>
+    <button onclick="votar('Bruno')">Votar em Bruno</button>
+    <button onclick="votar('Carlos')">Votar em Carlos</button>
+    <br><br>
+    <button onclick="mostrarVencedor()">Encerrar Votação</button>
+
+    <h3>Placar:</h3>
+    <p>Alice: <span id="votos-Alice">0</span></p>
+    <p>Bruno: <span id="votos-Bruno">0</span></p>
+    <p>Carlos: <span id="votos-Carlos">0</span></p>
+
+    <h2 id="vencedor" style="color: blue;"></h2>
+
+    <script>
+        let votos = { Alice: 0, Bruno: 0, Carlos: 0 };
+
+        function votar(candidato) {
+            votos[candidato]++;
+            document.getElementById(`votos-${candidato}`).innerText = votos[candidato];
+        }
+
+        function mostrarVencedor() {
+            let vencedor = "";
+            let maxVotos = -1;
+            let empate = false;
+
+            for (let cand in votos) {
+                if (votos[cand] > maxVotos) {
+                    maxVotos = votos[cand];
+                    vencedor = cand;
+                    empate = false;
+                } else if (votos[cand] === maxVotos) {
+                    empate = true;
+                }
+            }
+
+            let msg = document.getElementById("vencedor");
+            if (empate && maxVotos > 0) {
+                msg.innerText = "Votação terminou em Empate!";
+            } else if (maxVotos === 0) {
+                msg.innerText = "Nenhum voto registrado.";
+            } else {
+                msg.innerText = `O vencedor é: ${vencedor} com ${maxVotos} votos!`;
+            }
+        }
+    </script>
+</body>
+</html>

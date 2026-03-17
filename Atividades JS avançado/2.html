@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ex 2 - Porteiro Digital</title>
+</head>
+<body>
+    <h2>Controle de Entrada</h2>
+    <input type="number" id="idade" placeholder="Digite sua idade">
+    <button id="btn-verificar">Verificar</button>
+    <h3 id="resultado"></h3>
+
+    <script>
+        const btnVerificar = document.getElementById("btn-verificar");
+        const inputIdade = document.getElementById("idade");
+        const resultado = document.getElementById("resultado");
+
+        btnVerificar.addEventListener("click", function() {
+            let idade = Number(inputIdade.value);
+
+            if (idade >= 18) {
+                resultado.innerText = "Entrada permitida";
+                resultado.style.color = "green";
+            } else {
+                resultado.innerText = "Entrada proibida";
+                resultado.style.color = "red";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ex 5 - Tabuada</title>
+</head>
+<body>
+    <h2>Gerador de Tabuada</h2>
+    <input type="number" id="numero-tabuada" placeholder="Digite um número">
+    <button onclick="gerarTabuada()">Gerar</button>
+    <div id="resultado-tabuada"></div>
+
+    <script>
+        function gerarTabuada() {
+            let num = document.getElementById("numero-tabuada").value;
+            let divResultado = document.getElementById("resultado-tabuada");
+            
+            if (num === "") return alert("Digite um número validado!");
+            
+            divResultado.innerHTML = ""; 
+            
+            for (let i = 1; i <= 10; i++) {
+                let p = document.createElement("p");
+                p.innerText = `${num} x ${i} = ${num * i}`;
+                divResultado.appendChild(p);
+            }
+        }
+    </script>
+</body>
+</html>

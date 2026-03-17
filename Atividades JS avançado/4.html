@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Ex 4 - Notas</title>
+</head>
+<body>
+    <h2>Sistema de Notas</h2>
+    <input type="number" id="nota1" placeholder="Nota 1 (0-10)">
+    <input type="number" id="nota2" placeholder="Nota 2 (0-10)">
+    <button id="btn-media">Calcular Média</button>
+    <h3 id="status-aluno"></h3>
+
+    <script>
+        document.getElementById("btn-media").addEventListener("click", calcularMedia);
+
+        function calcularMedia() {
+            let n1 = document.getElementById("nota1").value;
+            let n2 = document.getElementById("nota2").value;
+            let status = document.getElementById("status-aluno");
+
+            if (n1 === "" || n2 === "") {
+                alert("Preencha as duas notas!");
+                return;
+            }
+
+            let media = (Number(n1) + Number(n2)) / 2;
+
+            if (media >= 7) {
+                status.innerText = `Média: ${media} - Aprovado`;
+                status.style.color = "green";
+            } else if (media >= 5 && media < 7) {
+                status.innerText = `Média: ${media} - Recuperação`;
+                status.style.color = "#d4b106";
+            } else {
+                status.innerText = `Média: ${media} - Reprovado`;
+                status.style.color = "red";
+            }
+        }
+    </script>
+</body>
+</html>
