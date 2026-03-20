@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <title>Dashboard</title>
+</head>
+<body bgcolor="#f4f4f4" text="#000000">
+    <font face="Verdana, Arial, sans-serif">
+
+        <table width="100%" bgcolor="#333333" cellpadding="15" cellspacing="0" border="0">
+            <tr>
+                <td align="center">
+                    <font color="#ffffff" size="6"><b>Dashboard</b></font>
+                </td>
+            </tr>
+        </table>
+
+        <table width="100%" cellpadding="5" cellspacing="0" border="0">
+            <tr>
+                <td align="center" height="30">
+                    <div id="msg-box">&nbsp;</div>
+                </td>
+            </tr>
+        </table>
+
+        <table width="100%" border="0" cellpadding="10" cellspacing="10">
+            <tr>
+                <td width="30%" valign="top" bgcolor="#ffffff">
+                    <table width="100%" border="1" bordercolor="#cccccc" cellpadding="10" cellspacing="0">
+                        <tr>
+                            <td align="center" bgcolor="#eeeeee">
+                                <font size="4" color="#000080"><b>Perfil do Usuário</b></font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                <div id="profile-content"><i>Carregando...</i></div>
+                            </td>
+                        </tr>
+                    </table>
+                    
+                    <br><br>
+
+                    <table width="100%" border="1" bordercolor="#cccccc" cellpadding="10" cellspacing="0">
+                        <tr>
+                            <td align="center" bgcolor="#eeeeee">
+                                <font size="4" color="#000080"><b>Multiverso (Sorteio)</b></font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                <div id="rick-content"><i>Carregando...</i></div>
+                                <br><br>
+                                <button id="rick-btn">Sortear Novo Personagem</button>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+
+                <td width="40%" valign="top" bgcolor="#ffffff">
+                    <table width="100%" border="1" bordercolor="#cccccc" cellpadding="10" cellspacing="0">
+                        <tr>
+                            <td align="center" bgcolor="#eeeeee">
+                                <font size="4" color="#000080"><b>Lista de Tarefas</b></font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <center>
+                                    <input type="text" id="task-input" size="30" placeholder="Digite uma tarefa">
+                                    <button id="add-task-btn">Adicionar</button>
+                                </center>
+                                <hr color="#cccccc">
+                                <center>
+                                    <input type="text" id="search-input" size="20" placeholder="Buscar tarefa">
+                                    <select id="filter-select">
+                                        <option value="all">Todas</option>
+                                        <option value="pending">Pendentes</option>
+                                        <option value="done">Concluídas</option>
+                                    </select>
+                                </center>
+                                <hr color="#cccccc">
+                                <center>
+                                    <font size="2">
+                                        <b>Total: <span id="count-total">0</span></b> | 
+                                        <font color="#cc0000">Pendentes: <span id="count-pending">0</span></font> | 
+                                        <font color="#008800">Concluídas: <span id="count-done">0</span></font>
+                                    </font>
+                                </center>
+                                <br>
+                                <table width="100%" border="1" bordercolor="#e0e0e0" cellpadding="5" cellspacing="0">
+                                    <tbody id="task-list"></tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+
+                <td width="30%" valign="top" bgcolor="#ffffff">
+                    <table width="100%" border="1" bordercolor="#cccccc" cellpadding="10" cellspacing="0">
+                        <tr>
+                            <td align="center" bgcolor="#eeeeee">
+                                <font size="4" color="#000080"><b>Pokédex Rápida</b></font>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                <input type="text" id="poke-input" size="15" placeholder="Nome ou ID">
+                                <button id="poke-btn">Buscar</button>
+                                <hr color="#cccccc">
+                                <div id="poke-content"><i>Aguardando busca...</i></div>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </table>
+
+    </font>
+
+    <script>
+        let tasks = JSON.parse(localStorage.getItem('html_only_tasks')) ||[];
+        const taskInput = document.getElementById('task-input');
+        const addTaskBtn = document.getElementById('add-task-btn');
+        const searchInput = document.getElementById('search-input');
+        const filterSelect = document.getElementById('filter-select');
+        const taskList = document.getElementById('task-list');
+
+        function showMsg(msg, isError) {
+            const msgBox = document.getElementById('msg-box');
+            const color = isError ? '#cc0000' : '#008800';
+            msgBox.innerHTML = `<font color="${color}" size="4"><b>${msg}</b></font>`;
+            setTimeout(() => { msgBox.innerHTML = '&nbsp;'; }, 3000);
+        }
+
+        function saveTasks() {
+            localStorage.setItem('html_only_tasks', JSON.stringify(tasks));
+        }
+
+        function updateCounters() {}
